@@ -21,11 +21,12 @@ export function filterTree<T>(
     readonly predicate: (el: T) => boolean;
     readonly getId: (el: T) => number;
     readonly getParentId: (el: T) => number;
-    readonly withParents: boolean;
-    readonly withChildren: boolean;
+    readonly withParents?: boolean;
+    readonly withChildren?: boolean;
   }
   // eslint-disable-next-line functional/prefer-readonly-type
 ): T[] {
+  if (options.nodes.length === 0) return [];
   options = Object.assign({ withParents: true, withChildren: true }, options);
   const res = options.nodes.filter(options.predicate);
   const resInitial = [...res];
